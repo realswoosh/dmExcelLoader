@@ -44,12 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryLoader.cs" />
+    <Compile Include="LoaderConfiguration.cs" />
     <Compile Include="ExcelLoader.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\Column.cs" />
+    <Compile Include="Resource\EnumParser.cs" />
     <Compile Include="Resource\Excel.cs" />
+    <Compile Include="Resource\HeaderMultiRow.cs" />
+    <Compile Include="Resource\HeaderSingleRow.cs" />
+    <Compile Include="Resource\IHeader.cs" />
     <Compile Include="Resource\Row.cs" />
     <Compile Include="Resource\Sheet.cs" />
     <Compile Include="Resource\Workbook.cs" />

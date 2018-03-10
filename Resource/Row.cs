@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader.Resource
 {
-	class Row
+	public class Row
 	{
 	}
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dmExcelLoader
+namespace dmExcelLoader.Resource
 {
-	public class Loader
+	interface IHeader
 	{
-		public LoaderConfiguration Configuration { get; set;}
 	}
 }
