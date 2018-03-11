@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,12 +53,17 @@
     <Compile Include="Resource\Column.cs" />
     <Compile Include="Resource\EnumParser.cs" />
     <Compile Include="Resource\Excel.cs" />
-    <Compile Include="Resource\HeaderMultiRow.cs" />
-    <Compile Include="Resource\HeaderSingleRow.cs" />
-    <Compile Include="Resource\IHeader.cs" />
+    <Compile Include="Resource\ExcelRange.cs" />
+    <Compile Include="Resource\HeaderParserMulti.cs" />
+    <Compile Include="Resource\HeaderParserSingle.cs" />
+    <Compile Include="IHeader.cs" />
     <Compile Include="Resource\Row.cs" />
     <Compile Include="Resource\Sheet.cs" />
     <Compile Include="Resource\Workbook.cs" />
+    <Compile Include="Resource\WorkSheet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ResourceClassTemplete\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dmExcelLoader.Resource
+namespace dmExcelLoader
 {
-	public class HeaderMultiRow : IHeader
+	interface IHeader
 	{
 	}
 }

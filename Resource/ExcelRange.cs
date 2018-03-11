@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dmExcelLoader
+namespace dmExcelLoader.Resource
 {
-	public class Loader
+	public class ExcelRange
 	{
-		public string Path { get; set; }
+		public string Row;
+		public string Col;
 	}
 }

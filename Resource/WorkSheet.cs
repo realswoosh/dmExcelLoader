@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader.Resource
 {
-	interface IHeader
+	public class WorkSheet
 	{
+		public List<Sheet> sheetList = new List<Sheet>();
 	}
 }

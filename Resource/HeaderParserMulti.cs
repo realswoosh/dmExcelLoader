@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader.Resource
 {
-	public class HeaderSingleRow : IHeader
+	public class HeaderParserMulti : IHeader
 	{
 	}
 }
