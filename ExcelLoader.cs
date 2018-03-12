@@ -11,28 +11,26 @@ namespace dmExcelLoader
 {
 	public class ExcelLoader : Loader, ILoader
 	{
-		public static LoaderConfiguration Configuration { get; set; }
-		
 		public List<Excel> excelList = new List<Excel>();
 
-		private readonly IHeader headerParser;
+		private IHeader headerParser;
 
 		public ExcelLoader()
 		{
-			if (Configuration.HeaderRowCount > 2)
-				headerParser = new HeaderParserMulti();
-			else
-				headerParser = new HeaderParserSingle();
+			
 		}
 
 		public void Load(string path)
 		{
 			Path = path;
-			
+
+			headerParser = HeaderParser.Create(Configuration);
+
 			string[] files = Directory.GetFiles(Path, "*.xlsx");
 			foreach (var file in files)
 			{
 				Excel excel = new Excel();
+				excel.Configuration = Configuration;
 				excel.Load(file);
 			}
 			

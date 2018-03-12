@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader
 {
-	interface IHeader
+	public interface IHeader
 	{
 	}
 }

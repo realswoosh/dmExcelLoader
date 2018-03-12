@@ -18,6 +18,8 @@ namespace dmExcelLoader.Resource
 
 		public WorkSheet workSheet;
 
+		public LoaderConfiguration Configuration { get; set; }
+
 		public Excel()
 		{
 
@@ -45,7 +47,7 @@ namespace dmExcelLoader.Resource
 			{
 				XmlDocument doc = new XmlDocument();
 				XmlNamespaceManager tmpNamespaceManager = new XmlNamespaceManager(doc.NameTable);
-				tmpNamespaceManager.AddNamespace("x", ExcelLoader.Configuration.namespaceSharedString);
+				tmpNamespaceManager.AddNamespace("x", Configuration.namespaceSharedString);
 
 				doc.Load(reader);
 
