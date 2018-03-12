@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader
 {
-	public class BinaryLoader : Loader, ILoader
+	interface IHeader
 	{
-		public void Load(string path)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
