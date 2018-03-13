@@ -45,23 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryLoader.cs" />
-    <Compile Include="HeaderParser.cs" />
+    <Compile Include="FormatParser\HeaderParser.cs" />
     <Compile Include="LoaderConfiguration.cs" />
     <Compile Include="ExcelLoader.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="Loader.cs" />
+    <Compile Include="LoaderNamespace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\Column.cs" />
+    <Compile Include="Resource\Cell.cs" />
     <Compile Include="Resource\EnumParser.cs" />
     <Compile Include="Resource\Excel.cs" />
-    <Compile Include="Resource\ExcelRange.cs" />
-    <Compile Include="Resource\HeaderParserMulti.cs" />
-    <Compile Include="Resource\HeaderParserSingle.cs" />
-    <Compile Include="IHeader.cs" />
+    <Compile Include="FormatParser\HeaderParserMulti.cs" />
+    <Compile Include="FormatParser\HeaderParserSingle.cs" />
+    <Compile Include="FormatParser\IHeader.cs" />
     <Compile Include="Resource\Row.cs" />
+    <Compile Include="Resource\SharedStrings.cs" />
     <Compile Include="Resource\Sheet.cs" />
     <Compile Include="Resource\Workbook.cs" />
-    <Compile Include="Resource\WorkSheet.cs" />
+    <Compile Include="Resource\Worksheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ResourceClassTemplete\" />

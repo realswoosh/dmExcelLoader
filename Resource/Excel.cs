@@ -4,19 +4,23 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace dmExcelLoader.Resource
 {
 	public class Excel
 	{
-		public string FileName;
+		public string FileName { get; set; }
 
-		string[] sharedStrings;
+		public SharedStrings sst;
 
-		public WorkSheet workSheet;
+		Workbook workbook = new Workbook();
+
+		List<Sheet> sheetList;
 
 		public LoaderConfiguration Configuration { get; set; }
 
@@ -27,54 +31,91 @@ namespace dmExcelLoader.Resource
 
 		public void Load(string fileName)
 		{
-			using (ZipArchive archive = ZipFile.OpenRead(fileName))
+			FileName = fileName;
+
+			FileStream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+			using (ZipArchive archive = new ZipArchive(fs, ZipArchiveMode.Read))
 			{
 				foreach (ZipArchiveEntry entry in archive.Entries)
 				{
-					
+
 				}
 
+				ZipArchiveEntry entryWorkbook = archive.Entries.FirstOrDefault(x => x.Name == "workbook.xml");
 				ZipArchiveEntry entrySharedStrings = archive.Entries.FirstOrDefault(x => x.Name == "sharedStrings.xml");
-				
+
 				LoadSharedString(entrySharedStrings);
+				LoadWorkbook(entryWorkbook);
+
+				ZipArchiveEntry[] entrySheet =
+					archive.Entries.Where(x => Regex.IsMatch(x.FullName, @"xl/worksheets/sheet", RegexOptions.IgnoreCase)).ToArray();
+
+				LoadSheet(entrySheet);
 			}
 		}
 
-		void LoadSharedString(ZipArchiveEntry entry)
+		void LoadWorkbook(ZipArchiveEntry entry)
 		{
 			using (var stream = entry.Open())
 			using (var reader = XmlReader.Create(stream))
 			{
 				XmlDocument doc = new XmlDocument();
 				XmlNamespaceManager tmpNamespaceManager = new XmlNamespaceManager(doc.NameTable);
-				tmpNamespaceManager.AddNamespace("x", Configuration.namespaceSharedString);
+				tmpNamespaceManager.AddNamespace("x", LoaderNamespace.XmlNamespace);
 
 				doc.Load(reader);
 
-				XmlNodeList nodeList = doc.SelectNodes("//x:si", tmpNamespaceManager);
+				XmlNodeList nodeList = doc.GetElementsByTagName("sheet");
 
-				sharedStrings = new string[nodeList.Count];
+				sheetList = new List<Sheet>();
 
-				int i = 0;
-
-				foreach (XmlNode elem in nodeList)
+				foreach (XmlNode node in nodeList)
 				{
-					XmlNodeList multiLine = elem.SelectNodes("x:r/x:t", tmpNamespaceManager);
+					string name = node.Attributes["name"].Value;
+					int sheetId = Convert.ToInt32(node.Attributes["sheetId"].Value);
+					string rid = node.Attributes["id", LoaderNamespace.XmlNamespaceR].Value;
 
-					string str = "";
-					if (multiLine.Count > 0)
+					Sheet sheet = new Sheet()
 					{
-						foreach (XmlNode tn in multiLine)
-						{
-							str += tn.InnerText;
-						}
-					}
-					else
-						str = elem.SelectSingleNode("x:t", tmpNamespaceManager).InnerText;
+						name = name,
+						sheetId = sheetId,
+						rid = rid
+					};
 
-					sharedStrings[i++] = str;
+					if (Configuration.DescriptionSheetName.All(x => x == sheet.name))
+						sheet.IsDescription = true;
+
+					sheetList.Add(sheet);
 				}
 			}
+		}
+
+		void LoadSharedString(ZipArchiveEntry entry)
+		{
+			sst = DeserializedZipEntry<SharedStrings>(entry);
+
+			Workbook.sst = sst;
+		}
+
+		void LoadSheet(ZipArchiveEntry[] entrys)
+		{
+			foreach (var entry in entrys)
+			{
+				LoadSheet(entry);
+			}
+		}
+
+		void LoadSheet(ZipArchiveEntry entry)
+		{
+			var sheet = sheetList.FirstOrDefault(x => x.XmlName == entry.Name);
+			sheet.worksheet = DeserializedZipEntry<Worksheet>(entry);
+		}
+
+		private static T DeserializedZipEntry<T>(ZipArchiveEntry ZipArchiveEntry)
+		{
+			using (Stream stream = ZipArchiveEntry.Open())
+				return (T)new XmlSerializer(typeof(T)).Deserialize(XmlReader.Create(stream));
 		}
 	}
 }

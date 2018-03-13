@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace dmExcelLoader.Resource
 {
-	class Workbook
+	public class Workbook
 	{
+		public static SharedStrings sst;
 	}
 }

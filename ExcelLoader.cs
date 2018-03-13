@@ -26,14 +26,29 @@ namespace dmExcelLoader
 
 			headerParser = HeaderParser.Create(Configuration);
 
-			string[] files = Directory.GetFiles(Path, "*.xlsx");
-			foreach (var file in files)
+			try
 			{
-				Excel excel = new Excel();
-				excel.Configuration = Configuration;
-				excel.Load(file);
+				string[] files = Directory.GetFiles(Path, "*.xlsx");
+
+				files = files.Where(x => x.IndexOf('~') < 0).ToArray();
+				
+				foreach (var file in files)
+				{
+					Excel excel = new Excel();
+					excel.Configuration = Configuration;
+					excel.Load(file);
+
+					excelList.Add(excel);
+				}
+
 			}
-			
+			catch (DirectoryNotFoundException)
+			{
+				// Error
+				//
+				return;
+			}
+
 			LoadEnum();
 			LoadSheet();
 		}
