@@ -20,9 +20,7 @@ namespace dmExcelLoader.Resource
 
 		Workbook workbook = new Workbook();
 
-		List<Sheet> sheetList;
-
-		public LoaderConfiguration Configuration { get; set; }
+		public List<Sheet> sheetList;
 
 		public Excel()
 		{
@@ -83,8 +81,12 @@ namespace dmExcelLoader.Resource
 						rid = rid
 					};
 
-					if (Configuration.DescriptionSheetName.All(x => x == sheet.name))
+					/*
+					if (Configuration.DescriptionSheetName.Any(x => sheet.name.Contains(x)))
 						sheet.IsDescription = true;
+					if (Configuration.EnumSheetName.Any(x => sheet.name.Contains(x)))
+						sheet.IsEnum = true;
+					*/
 
 					sheetList.Add(sheet);
 				}

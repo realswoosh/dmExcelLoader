@@ -8,7 +8,6 @@ namespace dmExcelLoader
 {
 	public class Loader
 	{
-		public LoaderConfiguration Configuration { get; set;}
 
 		public string Path { get; set; }
 	}

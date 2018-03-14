@@ -22,9 +22,7 @@ namespace dmExcelLoader.Resource
 				return string.Format("sheet{0}.xml", Regex.Match(rid, @"[0-9]").Value);
 			}
 		}
-
-		public bool IsDescription { get; set; } = false;
-
+		
 		public Worksheet worksheet;
 	}
 }

@@ -13,8 +13,6 @@ namespace dmExcelLoader
 	{
 		public List<Excel> excelList = new List<Excel>();
 
-		private IHeader headerParser;
-
 		public ExcelLoader()
 		{
 			
@@ -23,8 +21,6 @@ namespace dmExcelLoader
 		public void Load(string path)
 		{
 			Path = path;
-
-			headerParser = HeaderParser.Create(Configuration);
 
 			try
 			{
@@ -35,7 +31,6 @@ namespace dmExcelLoader
 				foreach (var file in files)
 				{
 					Excel excel = new Excel();
-					excel.Configuration = Configuration;
 					excel.Load(file);
 
 					excelList.Add(excel);

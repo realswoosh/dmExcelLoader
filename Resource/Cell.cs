@@ -10,59 +10,73 @@ namespace dmExcelLoader.Resource
 {
 	public class Cell
 	{
+		[XmlIgnore]
+		string reference;
+
 		[XmlAttribute("r")]
-		public string CellRefernce
+		public string Reference
 		{
-			get
-			{
-				return index.ToString();
-			}
+			get { return reference; }
 			set
 			{
-				index = GetColumnIndex(value);
+				reference = value;
+				string tmp = new Regex("[0-9]+").Match(reference).Value.ToUpper();
+				row = Convert.ToInt32(tmp);
+				referenceIndex = GetCellReferenceIndex(value);
 			}
 		}
+		
+		[XmlIgnore]
+		public int ReferenceIndex
+		{
+			get { return referenceIndex; }
+		}
 
+		[XmlIgnore]
+		int row;
 		[XmlAttribute("t")]
 		public string tType = "";
-		[XmlAttribute("v")]
+		[XmlElement("v")]
 		public string Value
 		{
 			get
 			{
-				return realValue;
+				return value;
 			}
 			set
 			{
-				realValue = value;
+				this.value = value;
 
 				if (tType.Equals("s"))
 				{
-					objValue = Workbook.sst.si[Convert.ToInt32(realValue)].Text;
-					realType = typeof(string);
+					Text = Workbook.sst.si[Convert.ToInt32(this.value)].Text;
+					type = typeof(string);
 				}
 				else if (tType.Equals("str"))
 				{
-					objValue = realValue;
-					realType = typeof(string);
+					Text = this.value;
+					type = typeof(string);
 				}
 				else
 				{
-					objValue = value;
+					Text = Convert.ToString(value);
 				}
 			}
 		}
 
 		[XmlIgnore]
-		public object objValue;
-
-		private string realValue;
-		private Type realType;
+		string value;
+		[XmlIgnore]
+		public string Text { get; set; }
+		[XmlIgnore]
+		Type type;
+		[XmlIgnore]
+		public Type RealType { get { return type; } }
 
 		[XmlIgnore]
-		public int index;
+		int referenceIndex;
 
-		private int GetColumnIndex(string reference)
+		public static int GetCellReferenceIndex(string reference)
 		{
 			string letter = new Regex("[A-Za-z]+").Match(reference).Value.ToUpper();
 
@@ -76,5 +90,19 @@ namespace dmExcelLoader.Resource
 			return tmpIndex - 1;
 		}
 
+		public static string GetCellReference(int index)
+		{
+			int div = index;
+			string letter = String.Empty;
+			int mod = 0;
+
+			while (div > 0)
+			{
+				mod = div % 26;
+				letter = (char)(65 + mod) + letter;
+				div = (div - mod) / 26;
+			}
+			return letter;
+		}
 	}
 }
