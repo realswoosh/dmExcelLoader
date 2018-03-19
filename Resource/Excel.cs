@@ -7,11 +7,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace dmExcelLoader.Resource
 {
+	[Serializable]
 	public class Excel
 	{
 		public string FileName { get; set; }
@@ -76,17 +76,11 @@ namespace dmExcelLoader.Resource
 
 					Sheet sheet = new Sheet()
 					{
+						fileName = FileName,
 						name = name,
 						sheetId = sheetId,
 						rid = rid
 					};
-
-					/*
-					if (Configuration.DescriptionSheetName.Any(x => sheet.name.Contains(x)))
-						sheet.IsDescription = true;
-					if (Configuration.EnumSheetName.Any(x => sheet.name.Contains(x)))
-						sheet.IsEnum = true;
-					*/
 
 					sheetList.Add(sheet);
 				}

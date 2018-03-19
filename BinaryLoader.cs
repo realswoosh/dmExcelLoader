@@ -8,7 +8,7 @@ namespace dmExcelLoader
 {
 	public class BinaryLoader : Loader, ILoader
 	{
-		public void Load(string path)
+		public void Load()
 		{
 			throw new NotImplementedException();
 		}

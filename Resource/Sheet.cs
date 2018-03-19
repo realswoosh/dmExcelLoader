@@ -11,6 +11,8 @@ namespace dmExcelLoader.Resource
 {
 	public class Sheet
 	{
+		public string fileName;
+
 		public string name;
 		public int sheetId;
 		public string rid;

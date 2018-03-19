@@ -21,7 +21,7 @@ namespace dmExcelLoader.Resource
 			{
 				reference = value;
 				string tmp = new Regex("[0-9]+").Match(reference).Value.ToUpper();
-				row = Convert.ToInt32(tmp);
+				Row = Convert.ToInt32(tmp);
 				referenceIndex = GetCellReferenceIndex(value);
 			}
 		}
@@ -33,7 +33,7 @@ namespace dmExcelLoader.Resource
 		}
 
 		[XmlIgnore]
-		int row;
+		public int Row { get; set; }
 		[XmlAttribute("t")]
 		public string tType = "";
 		[XmlElement("v")]
@@ -50,12 +50,10 @@ namespace dmExcelLoader.Resource
 				if (tType.Equals("s"))
 				{
 					Text = Workbook.sst.si[Convert.ToInt32(this.value)].Text;
-					type = typeof(string);
 				}
 				else if (tType.Equals("str"))
 				{
 					Text = this.value;
-					type = typeof(string);
 				}
 				else
 				{
@@ -68,10 +66,6 @@ namespace dmExcelLoader.Resource
 		string value;
 		[XmlIgnore]
 		public string Text { get; set; }
-		[XmlIgnore]
-		Type type;
-		[XmlIgnore]
-		public Type RealType { get { return type; } }
 
 		[XmlIgnore]
 		int referenceIndex;
@@ -95,6 +89,11 @@ namespace dmExcelLoader.Resource
 			int div = index;
 			string letter = String.Empty;
 			int mod = 0;
+
+			if (div == 0)
+			{
+				return (char)65 + letter;
+			}
 
 			while (div > 0)
 			{

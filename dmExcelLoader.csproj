@@ -37,15 +37,25 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes.cs" />
     <Compile Include="BinaryLoader.cs" />
     <Compile Include="ExcelLoader.cs" />
+    <Compile Include="FormatParser\EnumInfo.cs" />
+    <Compile Include="FormatParser\EnumParser.cs" />
+    <Compile Include="FormatParser\FormatSheet.cs" />
+    <Compile Include="FormatParser\HeaderFactory.cs" />
+    <Compile Include="FormatParser\HeaderParserMulti.cs" />
+    <Compile Include="FormatParser\HeaderParserSingle.cs" />
+    <Compile Include="FormatParser\HeaderType.cs" />
+    <Compile Include="FormatParser\IHeader.cs" />
+    <Compile Include="KeyPairDictionary.cs" />
+    <Compile Include="LoaderConfiguration.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="LoaderNamespace.cs" />
@@ -57,7 +67,11 @@
     <Compile Include="Resource\Sheet.cs" />
     <Compile Include="Resource\Workbook.cs" />
     <Compile Include="Resource\Worksheet.cs" />
+    <Compile Include="TypeInfos.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="OutputResourceManager\" />
+    <Folder Include="OutputResource\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

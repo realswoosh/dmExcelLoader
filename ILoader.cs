@@ -8,6 +8,6 @@ namespace dmExcelLoader
 {
 	public interface ILoader
 	{
-		void Load(string path);
+		void Load();
 	}
 }

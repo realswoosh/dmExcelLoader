@@ -10,5 +10,6 @@ namespace dmExcelLoader
 	{
 
 		public string Path { get; set; }
+				
 	}
 }
