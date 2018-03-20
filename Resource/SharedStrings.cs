@@ -17,6 +17,7 @@ namespace dmExcelLoader.Resource
 		}
 	}
 
+	[Serializable]
 	public class Si
 	{
 		[XmlElement("t")]
@@ -37,6 +38,7 @@ namespace dmExcelLoader.Resource
 		}
 	}
 
+	[Serializable]
 	public class Sirow
 	{
 		public string t;

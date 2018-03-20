@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace dmExcelLoader.Resource
 {
+	[Serializable]
 	public class Cell
 	{
 		[XmlIgnore]

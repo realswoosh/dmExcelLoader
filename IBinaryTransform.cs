@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dmExcelLoader.Resource
+namespace dmExcelLoader
 {
-	[Serializable]
-	public class Workbook
+	public interface IBinaryTransform
 	{
-		public static SharedStrings sst;
+		void Transform();
 	}
 }

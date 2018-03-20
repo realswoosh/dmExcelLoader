@@ -54,6 +54,7 @@
     <Compile Include="FormatParser\HeaderParserSingle.cs" />
     <Compile Include="FormatParser\HeaderType.cs" />
     <Compile Include="FormatParser\IHeader.cs" />
+    <Compile Include="IBinaryTransform.cs" />
     <Compile Include="KeyPairDictionary.cs" />
     <Compile Include="LoaderConfiguration.cs" />
     <Compile Include="ILoader.cs" />

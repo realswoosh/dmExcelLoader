@@ -5,20 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dmExcelLoader
 {
-	public class ExcelLoader : Loader, ILoader
+	public class ExcelLoader : Loader, ILoader, IBinaryTransform
 	{
 		public List<FormatSheet> formatSheetList = new List<FormatSheet>();
-
-		public LoaderConfiguration Configuration { get; set; }
+	
 		public EnumParser enumParser;
-
-		private List<Excel> excelList;
-
+		
 		public ExcelLoader()
 		{
 			
@@ -26,13 +25,11 @@ namespace dmExcelLoader
 
 		public void Load()
 		{
-			excelList = new List<Excel>();
-
-			Path = Configuration.Path;
+			string path = Configuration.Path;
 
 			try
 			{
-				string[] files = Directory.GetFiles(Path, "*.xlsx");
+				string[] files = Directory.GetFiles(path, "*.xlsx");
 
 				files = files.Where(x => x.IndexOf('~') < 0).ToArray();
 				
@@ -133,6 +130,29 @@ namespace dmExcelLoader
 						formatSheet.rowList.AddRange(dataRow);
 					}
 				}
+			}
+		}
+
+		public void Transform()
+		{
+			
+			if (Directory.Exists(Configuration.PathOutputBinary) == false)
+				Directory.CreateDirectory(Configuration.PathOutputBinary);
+
+			foreach (var excel in excelList)
+			{
+				BinaryFormatter formmater = new BinaryFormatter();
+
+				formmater.AssemblyFormat = FormatterAssemblyStyle.Simple;
+
+				Stream stream = new FileStream(Configuration.PathBinary + "/" + System.IO.Path.GetFileNameWithoutExtension(excel.FileName) + ".dat",
+											   FileMode.Create, 
+											   FileAccess.Write, 
+											   FileShare.None);
+
+				formmater.Serialize(stream, excel);
+
+				stream.Close();
 			}
 		}
 	}

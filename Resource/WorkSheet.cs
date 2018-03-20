@@ -12,6 +12,7 @@ namespace dmExcelLoader.Resource
 	[XmlRoot("worksheet", Namespace = "http://schemas.openxmlformats.org/spreadsheetml/2006/main")]
 	public class Worksheet
 	{
+		[Serializable]
 		public class Dimension
 		{
 			[XmlAttribute("ref")]
