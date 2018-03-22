@@ -11,7 +11,12 @@ namespace dmExcelLoader
 	{
 		public LoaderConfiguration Configuration { get; set; }
 
-		protected List<Excel> excelList = new List<Excel>();
+		public List<Excel> excelList = new List<Excel>();
+
+		public IEnumerator<Excel> GetEnumerator()
+		{
+			return excelList.GetEnumerator();
+		}
 
 		public string Path { get; set; }
 				

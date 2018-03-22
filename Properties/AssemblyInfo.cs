@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("dmExcelLoader")]
 [assembly: AssemblyDescription("Excel Data Loader")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("dm")]
+[assembly: AssemblyCompany("Shin dong myung")]
 [assembly: AssemblyProduct("dmExcelLoader")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("dm")]
+[assembly: AssemblyTrademark("Shin dong myung")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호를
 // 기본값으로 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.1.0")]
-[assembly: AssemblyFileVersion("0.0.1.0")]
+[assembly: AssemblyVersion("0.0.2.1")]
+[assembly: AssemblyFileVersion("0.0.2.1")]
