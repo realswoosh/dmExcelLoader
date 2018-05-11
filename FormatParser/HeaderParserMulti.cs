@@ -16,11 +16,7 @@ namespace dmExcelLoader.FormatParser
 		{
 			if (rows.Length != 2)
 				throw new Exception("Rows Length Invalid");
-
-			if (rows[0].FilledCells.Length != 
-				rows[1].FilledCells.Length)
-				throw new Exception("FielledCell Length Different");
-
+						
 			List<HeaderType> headerTypeList = new List<HeaderType>();
 
 			Row row = rows[0];
@@ -29,12 +25,14 @@ namespace dmExcelLoader.FormatParser
 			for (int i = 0; i < row.FilledCells.Length; i++)
 			{
 				Cell cell = row.FilledCells[i];
-				Cell cellType = rowType.FilledCells[i];
+				int refIndex = Cell.GetCellReferenceIndex(cell.Reference);
+				Cell cellType = rowType.FilledCells[refIndex];
 
 				if (cell.ReferenceIndex < Configuration.StartCol)
 					continue;
 
-				if (cell.Text.Length == 0 || Configuration.PrefixIgnoreColumn.Any(x => x == cell.Text[0]))
+				if (cell.Text.Length == 0 || (Configuration.PrefixIgnoreColumn.Any(x => x == cell.Text[0]) ||
+											  Configuration.PrefixIgnoreColumn.Any(x => x == cellType.Text[0])))
 					continue;
 
 				string[] typeStr = cellType.Text.Split(':');

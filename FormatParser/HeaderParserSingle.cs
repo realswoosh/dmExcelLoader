@@ -17,7 +17,7 @@ namespace dmExcelLoader.FormatParser
 			///  ex : id:int[:key]
 			///  ex : damageFactor:float
 			///  ex : name:string
-
+			
 			if (rows.Length != 1)
 				throw new Exception("Rows Length Invalid");
 
