@@ -12,7 +12,7 @@ namespace dmExcelLoader.FormatParser
 	{
 		public static IHeader Create(LoaderConfiguration configuration)
 		{
-			if (configuration.Header > 2)
+			if (configuration.Header > 1)
 				return new HeaderParserMulti()
 				{
 					Configuration = configuration
