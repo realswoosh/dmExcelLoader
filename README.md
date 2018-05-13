@@ -25,4 +25,9 @@ excelLoader.FormatParse();
 // transform binary data
 excelLoader.Transform();
 ```
-if using specific format then libary make load c sharp code. (ex : https://github.com/realswoosh/dmContentsBuilder)
+
+more information.
+
+download https://github.com/realswoosh/dmContentsBuilder
+
+
